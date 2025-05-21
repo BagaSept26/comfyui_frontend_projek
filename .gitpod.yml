@@ -7,7 +7,7 @@ tasks:
       git submodules update --init --recursive
 
       echo "Installing ComfyUI Backend (Python) depedencies..."
-      cd comfyui_backend
+      cd ComfyUI
       pip install --no-cache-dir -r requirements.txt
 
       echo "Installing ComfyUI Frontend (Node.js) depedencies..."
