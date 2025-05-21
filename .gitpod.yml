@@ -30,15 +30,15 @@ tasks:
       echo "   # Hasil build akan ada di comfyui_frontend/dist/"
       echo ""
       echo "2. (Penting!) Copy built frontend files to backend's web serving directory:"
-      echo "   # Pastikan comfyui_backend/web/ kosong atau hapus isinya jika ada frontend default"
-      echo "   rm -rf comfyui_backend/web/*" #sesuaikan jika folder berbeda
-      echo "   cp -r comfyui_frontend/dist* comfyui_backend/web/"
+      echo "   # Pastikan ComfyUI/web/ kosong atau hapus isinya jika ada frontend default"
+      echo "   rm -rf ComfyUI/web/*" #sesuaikan jika folder berbeda
+      echo "   cp -r comfyui_frontend/dist* ComfyUI/web/"
       echo ""
-      echo "3. Download Stable Diffusion models into 'comfyui_backend/models/checkpoints/'"
+      echo "3. Download Stable Diffusion models into 'ComfyUI/models/checkpoints/'"
       echo "   (Example: wget ... v1-5-pruned-emaonly.safetensors)"
       echo ""
       echo "4. Start the ComfyUI Backend (in a new terminal):"
-      echo "   cd comfyui_backend"
+      echo "   cd ComfyUI"
       echo "   python main.py --listen --port 8188"
       echo "--------------------------------------------------------------------------------"
       
