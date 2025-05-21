@@ -1,0 +1,63 @@
+image: gitpod/workspace-full-nvc
+
+tasks:
+  - name: Setup Backend & Frontend
+    init: |
+      echo "Updating submodules..."
+      git submodules update --init --recursive
+
+      echo "Installing ComfyUI Backend (Python) depedencies..."
+      cd comfyui_backend
+      pip install --no-cache-dir -r requirements.txt
+
+      echo "Installing ComfyUI Frontend (Node.js) depedencies..."
+      cd comfyui_frontend #directory
+      #cek yarn.lock / package-lock.json utk install lebih cepat
+      if [ -f "package-lock.json" ]; then
+        npm ci
+      elif [ -f "yarn.lock" ]; then
+        yarn install --frozen-lockfile
+      else 
+        npm install #atau yarn
+      fi
+      cd ..
+
+      echo "--------------------------------------------------------------------------------"
+      echo "Setup complete. To run:"
+      echo "1. Build the frontend (in a new terminal):"
+      echo "   cd comfyui_frontend"
+      echo "   npm run build" #atau yarn
+      echo "   # Hasil build akan ada di comfyui_frontend/dist/"
+      echo ""
+      echo "2. (Penting!) Copy built frontend files to backend's web serving directory:"
+      echo "   # Pastikan comfyui_backend/web/ kosong atau hapus isinya jika ada frontend default"
+      echo "   rm -rf comfyui_backend/web/*" #sesuaikan jika folder berbeda
+      echo "   cp -r comfyui_frontend/dist* comfyui_backend/web/"
+      echo ""
+      echo "3. Download Stable Diffusion models into 'comfyui_backend/models/checkpoints/'"
+      echo "   (Example: wget ... v1-5-pruned-emaonly.safetensors)"
+      echo ""
+      echo "4. Start the ComfyUI Backend (in a new terminal):"
+      echo "   cd comfyui_backend"
+      echo "   python main.py --listen --port 8188"
+      echo "--------------------------------------------------------------------------------"
+      
+    command: |
+      echo "Workspace ready. Follow nstruction from 'Setup Backend & Frontend' task output to run."
+
+ports:
+  - port: 8188
+    onOpen: open-preview
+    name:ComfyUI(Backend+Frontend)
+    description: ComfyUI Interface (Frontend served by Backend)
+    visibility: public
+
+vscode:
+  extensions:
+    - ms-python.python
+    - eamodio.gitlens
+    - dbaeumer.vscode-eslint
+    - esbenp.prettier-vscode
+    - svelte.svelte-vscode #Berguna karena ComfyUI_frontend menggunakan Svelte
+
+    
