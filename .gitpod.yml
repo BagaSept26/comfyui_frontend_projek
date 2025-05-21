@@ -48,7 +48,7 @@ tasks:
 ports:
   - port: 8188
     onOpen: open-preview
-    name:ComfyUI(Backend+Frontend)
+    name: ComfyUI (Backend+Frontend)
     description: ComfyUI Interface (Frontend served by Backend)
     visibility: public
 
